@@ -1,7 +1,8 @@
-package com.icaboalo.aplications
+package com.icaboalo.aplications.ui.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.icaboalo.aplications.R
 
 class MainActivity : AppCompatActivity() {
 
