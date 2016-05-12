@@ -2,6 +2,7 @@ package com.icaboalo.aplications.ui.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,6 @@ import com.icaboalo.aplications.R
 import com.icaboalo.aplications.io.ApiClient
 import com.icaboalo.aplications.io.model.EntryApiModel
 import com.icaboalo.aplications.io.model.ResponseApiModel
-import com.icaboalo.aplications.ui.adapter.EntryBaseAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,7 +22,7 @@ import java.util.*
  */
 class HomeFragment: Fragment() {
 
-    var listView: ListView? = null
+    var appRecycler: RecyclerView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -30,7 +30,7 @@ class HomeFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        listView = view.findViewById(R.id.list_view) as ListView?
+        appRecycler = view.findViewById(R.id.app_recycler) as RecyclerView?
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -46,9 +46,7 @@ class HomeFragment: Fragment() {
                 if (response.isSuccessful){
                     val entryList: ArrayList<EntryApiModel> = response.body().feed.entry
 
-                    for (entry in entryList){
-                        Log.d("ENTRY", "${entry.name.label} \n ${entry.category.attributes.label}")
-                    }
+                    setupListView(entryList)
                 }
 
             }
@@ -60,15 +58,26 @@ class HomeFragment: Fragment() {
     }
 
     fun setupListView(list: ArrayList<EntryApiModel>){
-//        entryAdapter = EntryBaseAdapter(context)
-    }
-//        mAdapter = new CustomAdapter(this);
-//        for (int i = 1; i < 30; i++) {
-//            mAdapter.addItem("Row Item #" + i);
-//            if (i % 4 == 0) {
-//                mAdapter.addSectionHeaderItem("Section #" + i);
+//        val entryAdapter = EntryBaseAdapter(context)
+//        Log.d("UNORDER", list.toString())
+//        Collections.sort(list, CustomComparator())
+//        Log.d("ORDER", list.toString())
+//        val categoryList = ArrayList<String>()
+//        for (entry in list){
+//            if (!categoryList.contains(entry.category.attributes.label)){
+//                categoryList.add(entry.category.attributes.label)
+//                entryAdapter.addSectionHeaderItem(entry)
 //            }
+//            entryAdapter.addItem(entry)
 //        }
-//        setListAdapter(mAdapter);
-//    }
+//        listView!!.adapter = entryAdapter
+//        Log.d("CATEGORY", categoryList.toString())
+    }
+
+    class CustomComparator: Comparator<EntryApiModel>{
+        override fun compare(entry1: EntryApiModel, entry2: EntryApiModel): Int {
+            return entry1.category.attributes.label.compareTo(entry1.category.attributes.label)
+        }
+
+    }
 }

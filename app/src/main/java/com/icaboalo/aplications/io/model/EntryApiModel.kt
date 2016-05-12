@@ -123,4 +123,8 @@ class EntryApiModel{
 
         }
     }
+
+    override fun toString(): String {
+        return name.label
+    }
 }
