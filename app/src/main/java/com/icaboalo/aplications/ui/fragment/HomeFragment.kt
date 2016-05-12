@@ -1,5 +1,6 @@
 package com.icaboalo.aplications.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -12,11 +13,13 @@ import com.icaboalo.aplications.R
 import com.icaboalo.aplications.io.ApiClient
 import com.icaboalo.aplications.io.model.EntryApiModel
 import com.icaboalo.aplications.io.model.ResponseApiModel
+import com.icaboalo.aplications.ui.activity.DetailActivity
 import com.icaboalo.aplications.ui.adapter.AppRecyclerAdapter
 import com.icaboalo.aplications.ui.adapter.OnViewHolderClick
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.Serializable
 import java.util.*
 
 /**
@@ -62,19 +65,15 @@ class HomeFragment: Fragment() {
     fun setupListView(list: ArrayList<EntryApiModel>){
         val appRecyclerAdapter = AppRecyclerAdapter(activity, list, object: OnViewHolderClick{
             override fun onClick(v: View, position: Int) {
-                Toast.makeText(activity, list[position].name.label, Toast.LENGTH_SHORT).show()
+                val entry = list[position]
+                val goToDetail: Intent = Intent(activity, DetailActivity::class.java)
+                goToDetail.putExtra("ENTRY", entry as Serializable)
+                startActivity(goToDetail)
             }
 
         })
         val linearLayout = LinearLayoutManager(activity)
         appRecycler?.adapter = appRecyclerAdapter
         appRecycler?.layoutManager = linearLayout
-    }
-
-    class CustomComparator: Comparator<EntryApiModel>{
-        override fun compare(entry1: EntryApiModel, entry2: EntryApiModel): Int {
-            return entry1.category.attributes.label.compareTo(entry1.category.attributes.label)
-        }
-
     }
 }
