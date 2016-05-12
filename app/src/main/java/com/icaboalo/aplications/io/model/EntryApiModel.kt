@@ -1,12 +1,13 @@
 package com.icaboalo.aplications.io.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 import java.util.*
 
 /**
  * Created by icaboalo on 12/05/16.
  */
-class EntryApiModel{
+class EntryApiModel: Serializable {
 
     constructor(name: Label, images: ArrayList<Label>, summary: Label, price: Label, contentType: Label, rights: Label, title: Label, link: Label, id: Label, artist: Label, category: Label, releaseDate: Label) {
         this.name = name
@@ -59,7 +60,7 @@ class EntryApiModel{
     @SerializedName("im:releaseDate")
     var releaseDate: Label
 
-    class Label{
+    class Label: Serializable{
 
         constructor(label: String, attributes: Attributes) {
             this.label = label
