@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
 import com.icaboalo.aplications.R
+import com.icaboalo.aplications.ui.fragment.HomeFragment
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(app_bar as Toolbar)
 
         navigationViewOnClick()
+        replaceFragment(HomeFragment())
 
     }
 

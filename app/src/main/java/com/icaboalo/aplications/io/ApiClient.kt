@@ -13,7 +13,7 @@ class ApiClient {
     fun getApiService(): ApiService {
         if (mApiService == null) {
             val nRetrofit = Retrofit.Builder()
-                    .baseUrl("https://history-store.herokuapp.com/api/")
+                    .baseUrl("https://itunes.apple.com/us/rss/topfreeapplications/limit=20/")
                     .addConverterFactory(GsonConverterFactory.create()).build()
             mApiService = nRetrofit.create(ApiService::class.java)
         }
