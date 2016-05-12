@@ -2,16 +2,18 @@ package com.icaboalo.aplications.ui.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
+import android.widget.Toast
 import com.icaboalo.aplications.R
 import com.icaboalo.aplications.io.ApiClient
 import com.icaboalo.aplications.io.model.EntryApiModel
 import com.icaboalo.aplications.io.model.ResponseApiModel
+import com.icaboalo.aplications.ui.adapter.AppRecyclerAdapter
+import com.icaboalo.aplications.ui.adapter.OnViewHolderClick
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -58,20 +60,15 @@ class HomeFragment: Fragment() {
     }
 
     fun setupListView(list: ArrayList<EntryApiModel>){
-//        val entryAdapter = EntryBaseAdapter(context)
-//        Log.d("UNORDER", list.toString())
-//        Collections.sort(list, CustomComparator())
-//        Log.d("ORDER", list.toString())
-//        val categoryList = ArrayList<String>()
-//        for (entry in list){
-//            if (!categoryList.contains(entry.category.attributes.label)){
-//                categoryList.add(entry.category.attributes.label)
-//                entryAdapter.addSectionHeaderItem(entry)
-//            }
-//            entryAdapter.addItem(entry)
-//        }
-//        listView!!.adapter = entryAdapter
-//        Log.d("CATEGORY", categoryList.toString())
+        val appRecyclerAdapter = AppRecyclerAdapter(activity, list, object: OnViewHolderClick{
+            override fun onClick(v: View, position: Int) {
+                Toast.makeText(activity, list[position].name.label, Toast.LENGTH_SHORT).show()
+            }
+
+        })
+        val linearLayout = LinearLayoutManager(activity)
+        appRecycler?.adapter = appRecyclerAdapter
+        appRecycler?.layoutManager = linearLayout
     }
 
     class CustomComparator: Comparator<EntryApiModel>{
