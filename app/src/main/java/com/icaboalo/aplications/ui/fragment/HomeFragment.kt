@@ -57,7 +57,7 @@ class HomeFragment: Fragment() {
             }
 
             override fun onFailure(call: Call<ResponseApiModel>?, t: Throwable?) {
-                throw UnsupportedOperationException()
+                getEntries()
             }
         })
     }
