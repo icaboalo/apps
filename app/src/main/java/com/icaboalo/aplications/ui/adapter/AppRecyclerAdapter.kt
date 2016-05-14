@@ -39,6 +39,7 @@ class AppRecyclerAdapter: RecyclerView.Adapter<AppRecyclerAdapter.AppViewHolder>
         val entry: EntryApiModel = entryList[position]
         holder.appPosition.text = "${position+1}"
         holder.appName.text = entry.name.label
+//        holder.appName.requestFocus(Int.MAX_VALUE)
         holder.appCategory.text = entry.category.attributes.label
         holder.setImage(entry.images[2].label)
     }
