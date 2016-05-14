@@ -2,9 +2,13 @@ package com.icaboalo.aplications.ui.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.view.animation.Animation
+import android.view.animation.TranslateAnimation
 import android.widget.ImageView
 import android.widget.TextView
 import com.icaboalo.aplications.R
@@ -39,7 +43,7 @@ class AppRecyclerAdapter: RecyclerView.Adapter<AppRecyclerAdapter.AppViewHolder>
         val entry: EntryApiModel = entryList[position]
         holder.appPosition.text = "${position+1}"
         holder.appName.text = entry.name.label
-//        holder.appName.requestFocus(Int.MAX_VALUE)
+        holder.appName.isSelected = true
         holder.appCategory.text = entry.category.attributes.label
         holder.setImage(entry.images[2].label)
     }
@@ -63,6 +67,7 @@ class AppRecyclerAdapter: RecyclerView.Adapter<AppRecyclerAdapter.AppViewHolder>
             this.appName = itemView.findViewById(appNameId) as TextView
             this.appCategory = itemView.findViewById(appCategoryId) as TextView
             this.appPosition = itemView.findViewById(appPositionId) as TextView
+            appName.ellipsize = TextUtils.TruncateAt.MARQUEE
             itemView.setOnClickListener(this)
         }
 
@@ -77,5 +82,6 @@ class AppRecyclerAdapter: RecyclerView.Adapter<AppRecyclerAdapter.AppViewHolder>
                 appImage.setImageDrawable(null)
             }
         }
+
     }
 }
