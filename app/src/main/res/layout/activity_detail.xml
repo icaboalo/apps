@@ -70,9 +70,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
+            <com.icaboalo.aplications.ui.view.ExpandableTextView
                 android:id="@+id/summary"
-                android:textSize="16sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
