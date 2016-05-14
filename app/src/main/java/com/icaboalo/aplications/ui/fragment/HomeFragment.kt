@@ -1,21 +1,23 @@
 package com.icaboalo.aplications.ui.fragment
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.ImageView
 import com.icaboalo.aplications.R
 import com.icaboalo.aplications.io.ApiClient
 import com.icaboalo.aplications.io.model.EntryApiModel
 import com.icaboalo.aplications.io.model.ResponseApiModel
 import com.icaboalo.aplications.ui.activity.DetailActivity
 import com.icaboalo.aplications.ui.adapter.AppRecyclerAdapter
-import com.icaboalo.aplications.ui.adapter.OnViewHolderClick
+import com.icaboalo.aplications.ui.adapter.OnViewHolderImageClick
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -63,12 +65,18 @@ class HomeFragment: Fragment() {
     }
 
     fun setupListView(list: ArrayList<EntryApiModel>){
-        val appRecyclerAdapter = AppRecyclerAdapter(activity, list, object: OnViewHolderClick{
-            override fun onClick(v: View, position: Int) {
+        val appRecyclerAdapter = AppRecyclerAdapter(activity, list, object: OnViewHolderImageClick {
+            override fun onClick(v: View, position: Int, imageView: ImageView) {
                 val entry = list[position]
                 val goToDetail: Intent = Intent(activity, DetailActivity::class.java)
                 goToDetail.putExtra("ENTRY", entry as Serializable)
-                startActivity(goToDetail)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    val options: ActivityOptionsCompat  = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, imageView, "activity_image_trans")
+                    startActivity(goToDetail, options.toBundle())
+                }
+                else {
+                    startActivity(goToDetail)
+                }
             }
 
         })

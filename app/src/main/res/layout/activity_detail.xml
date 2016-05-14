@@ -28,6 +28,7 @@
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:layout_marginRight="20dp"
+            android:transitionName="activity_image_trans"
             android:src="@mipmap/ic_launcher"/>
 
         <Button

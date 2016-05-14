@@ -20,9 +20,9 @@ class AppRecyclerAdapter: RecyclerView.Adapter<AppRecyclerAdapter.AppViewHolder>
     var context: Context
     var entryList: ArrayList<EntryApiModel>
     var inflater: LayoutInflater
-    var viewHolderClick: OnViewHolderClick
+    var viewHolderClick: OnViewHolderImageClick
 
-    constructor(context: Context, entryList: ArrayList<EntryApiModel>, viewHolderClickListener: OnViewHolderClick) : super() {
+    constructor(context: Context, entryList: ArrayList<EntryApiModel>, viewHolderClickListener: OnViewHolderImageClick) : super() {
         this.context = context
         this.entryList = entryList
         this.inflater = LayoutInflater.from(context)
@@ -55,9 +55,9 @@ class AppRecyclerAdapter: RecyclerView.Adapter<AppRecyclerAdapter.AppViewHolder>
         var appName: TextView
         var appCategory: TextView
         var appPosition: TextView
-        var viewHolderClick: OnViewHolderClick
+        var viewHolderClick: OnViewHolderImageClick
 
-        constructor(itemView: View, appNameId: Int, appCategoryId: Int, appImageId: Int, appPositionId: Int, viewHolderClickListener: OnViewHolderClick) : super(itemView){
+        constructor(itemView: View, appNameId: Int, appCategoryId: Int, appImageId: Int, appPositionId: Int, viewHolderClickListener: OnViewHolderImageClick) : super(itemView){
             this.viewHolderClick = viewHolderClickListener
             this.appImage = itemView.findViewById(appImageId) as ImageView
             this.appName = itemView.findViewById(appNameId) as TextView
@@ -67,7 +67,7 @@ class AppRecyclerAdapter: RecyclerView.Adapter<AppRecyclerAdapter.AppViewHolder>
         }
 
         override fun onClick(v: View) {
-            viewHolderClick.onClick(v, adapterPosition)
+            viewHolderClick.onClick(v, adapterPosition, appImage)
         }
 
         fun setImage(url: String){
