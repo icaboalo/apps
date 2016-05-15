@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import com.icaboalo.aplications.R
+import com.icaboalo.aplications.ui.fragment.CategoryFragment
 import com.icaboalo.aplications.ui.fragment.HomeFragment
 import com.icaboalo.aplications.util.VUtil
 import kotlinx.android.synthetic.main.activity_main.*
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
                     fragment = HomeFragment()
                 }
                 R.id.action_categories -> {
-
+                    fragment = CategoryFragment()
                 }
                 R.id.action_search -> {
 
