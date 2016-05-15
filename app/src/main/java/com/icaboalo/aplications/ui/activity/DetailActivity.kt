@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar
 import android.view.View
 import com.icaboalo.aplications.R
 import com.icaboalo.aplications.io.model.EntryApiModel
+import com.icaboalo.aplications.util.VUtil
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
 
@@ -21,8 +22,9 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_detail)
         setSupportActionBar(app_bar as Toolbar)
 
-        if(resources.getBoolean(R.bool.is_phone)){
+        if (VUtil().getOrientation(this)){
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
         }else{
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }

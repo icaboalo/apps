@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
 import com.icaboalo.aplications.R
 import com.icaboalo.aplications.ui.fragment.HomeFragment
+import com.icaboalo.aplications.util.VUtil
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -17,13 +18,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(app_bar as Toolbar)
 
-        if(resources.getBoolean(R.bool.is_phone)){
+        if (VUtil().getOrientation(this)){
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
         }else{
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
 
-        navigationViewOnClick()
+
+    navigationViewOnClick()
         replaceFragment(HomeFragment())
 
     }
