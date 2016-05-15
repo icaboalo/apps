@@ -14,6 +14,7 @@ import android.widget.TextView
 import com.icaboalo.aplications.R
 import com.icaboalo.aplications.io.model.EntryApiModel
 import com.squareup.picasso.Picasso
+import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 
 /**

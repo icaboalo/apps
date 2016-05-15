@@ -1,14 +1,13 @@
 package com.icaboalo.aplications.ui.activity
 
 import android.content.pm.ActivityInfo
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import com.icaboalo.aplications.R
 import com.icaboalo.aplications.ui.fragment.HomeFragment
 import com.icaboalo.aplications.util.VUtil
-
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -32,9 +31,15 @@ class MainActivity : AppCompatActivity() {
         navigation_view.setNavigationItemSelectedListener { item ->
             var fragment: Fragment? = null
             when (item.itemId) {
-//                R.id.action_capture_list -> {
-//                    fragment = PurchasesFragment()
-//                }
+                R.id.action_home -> {
+                    fragment = HomeFragment()
+                }
+                R.id.action_categories -> {
+
+                }
+                R.id.action_search -> {
+
+                }
             }
             replaceFragment(fragment!!)
             drawer_layout.closeDrawers()
