@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,9 +59,20 @@ class CategoryFragment: Fragment(){
     fun setupTabs(titleList: ArrayList<String>){
         val pagerList = ArrayList<MyViewPagerAdapter.ModelFragmentPager>()
         for (title in titleList){
-            pagerList.add(MyViewPagerAdapter.ModelFragmentPager(Fragment(), title))
+            pagerList.add(MyViewPagerAdapter.ModelFragmentPager(HomeFragment().newInstance(getEntryPerCategory(title, arguments.getSerializable("ENTRIES") as ArrayList<EntryApiModel>)), title))
         }
         viewPager?.adapter = MyViewPagerAdapter(childFragmentManager, pagerList)
         tabLayout?.setupWithViewPager(viewPager)
+    }
+
+    fun getEntryPerCategory(title: String, entryList: ArrayList<EntryApiModel>): ArrayList<EntryApiModel>{
+        val itemList = ArrayList<EntryApiModel>()
+        for (item in entryList){
+            if (item.category.attributes.label.equals(title)){
+                itemList.add(item)
+            }
+        }
+        Log.d("ENTRIES", itemList.toString())
+        return itemList
     }
 }

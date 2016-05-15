@@ -21,6 +21,10 @@ import com.icaboalo.aplications.ui.activity.DetailActivity
 import com.icaboalo.aplications.ui.adapter.AppRecyclerAdapter
 import com.icaboalo.aplications.ui.adapter.OnViewHolderImageClick
 import com.icaboalo.aplications.util.VUtil
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.SlideInLeftAnimationAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -82,6 +86,7 @@ class HomeFragment: Fragment() {
             val staggeredGridLayout = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             appRecycler?.layoutManager = staggeredGridLayout
         }
-        appRecycler?.adapter = appRecyclerAdapter
+        val scaleAnimator = ScaleInAnimationAdapter(appRecyclerAdapter)
+        appRecycler?.adapter = scaleAnimator
     }
 }

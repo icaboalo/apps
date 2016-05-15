@@ -45,6 +45,10 @@ dependencies {
 //    Circle image
     compile 'de.hdodenhof:circleimageview:2.0.0'
 
+
+    // jCenter
+    compile 'jp.wasabeef:recyclerview-animators:2.2.3'
+
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 buildscript {
