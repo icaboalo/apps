@@ -73,7 +73,7 @@ class EntryApiModel: Serializable {
         @SerializedName("attributes")
         var attributes: Attributes
 
-        class Attributes{
+        class Attributes: Serializable{
 
             constructor(height: String, amount: String, currency: String, term: String, label: String, rel: String, type: String, refUrl: String, id: String, bundleId: String, scheme: String) {
                 this.height = height
