@@ -86,7 +86,7 @@ class HomeFragment: Fragment() {
             val linearLayout = LinearLayoutManager(activity)
             appRecycler?.layoutManager = linearLayout
         }else{
-            val staggeredGridLayout = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+            val staggeredGridLayout = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             appRecycler?.layoutManager = staggeredGridLayout
         }
         appRecycler?.adapter = appRecyclerAdapter

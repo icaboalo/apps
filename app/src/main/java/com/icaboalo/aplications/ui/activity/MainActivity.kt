@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(app_bar as Toolbar)
-        navigationViewOnClick()
 
         if (VUtil().getOrientation(this@MainActivity)){
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -25,12 +24,8 @@ class MainActivity : AppCompatActivity() {
         }else{
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
-
-    }
-
-    override fun onResume() {
-        super.onResume()
         replaceFragment(HomeFragment())
+        navigationViewOnClick()
     }
 
     fun navigationViewOnClick() {
