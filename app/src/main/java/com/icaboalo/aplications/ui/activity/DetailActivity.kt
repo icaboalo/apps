@@ -23,10 +23,10 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         setSupportActionBar(app_bar as Toolbar)
 
         if (VUtil().getOrientation(this)){
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
         }else{
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
 
         entry = intent.getSerializableExtra("ENTRY") as EntryApiModel

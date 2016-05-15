@@ -66,7 +66,7 @@ class HomeFragment: Fragment() {
     }
 
     fun setupListView(list: ArrayList<EntryApiModel>){
-        val appRecyclerAdapter = AppRecyclerAdapter(activity, list, object: OnViewHolderImageClick {
+        val appRecyclerAdapter = AppRecyclerAdapter(context, list, object: OnViewHolderImageClick {
             override fun onClick(v: View, position: Int, imageView: ImageView) {
                 val entry = list[position]
                 val goToDetail: Intent = Intent(activity, DetailActivity::class.java)

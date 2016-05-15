@@ -19,10 +19,10 @@ class SplashScreenActivity : ActionBarActivity() {
         setContentView(R.layout.activity_splash_screen)
 
         if (VUtil().getOrientation(this)){
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
         }else{
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
 
 

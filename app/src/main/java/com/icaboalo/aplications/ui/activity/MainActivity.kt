@@ -17,18 +17,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(app_bar as Toolbar)
+        navigationViewOnClick()
 
-        if (VUtil().getOrientation(this)){
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        if (VUtil().getOrientation(this@MainActivity)){
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
         }else{
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
 
+    }
 
-    navigationViewOnClick()
+    override fun onResume() {
+        super.onResume()
         replaceFragment(HomeFragment())
-
     }
 
     fun navigationViewOnClick() {
@@ -47,6 +49,6 @@ class MainActivity : AppCompatActivity() {
 
     fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
-        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+        fragmentManager.beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit()
     }
 }
