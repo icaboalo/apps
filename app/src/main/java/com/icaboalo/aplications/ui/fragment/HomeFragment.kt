@@ -34,6 +34,14 @@ class HomeFragment: Fragment() {
 
     var appRecycler: RecyclerView? = null
 
+    fun newInstance(entries: ArrayList<EntryApiModel>): HomeFragment{
+        val fragment = HomeFragment()
+        val args = Bundle()
+        args.putSerializable("ENTRIES", entries)
+        fragment.arguments = args
+        return fragment
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -45,25 +53,10 @@ class HomeFragment: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        getEntries()
+        val entryList: ArrayList<EntryApiModel> = arguments.getSerializable("ENTRIES") as ArrayList<EntryApiModel>
+        setupListView(entryList)
     }
 
-    fun getEntries(){
-        val call: Call<ResponseApiModel> = ApiClient().getApiService().getResponse();
-        call.enqueue(object: Callback<ResponseApiModel>{
-
-            override fun onResponse(call: Call<ResponseApiModel>, response: Response<ResponseApiModel>) {
-                if (response.isSuccessful){
-                    val entryList: ArrayList<EntryApiModel> = response.body().feed.entry
-
-                    setupListView(entryList)
-                }
-            }
-            override fun onFailure(call: Call<ResponseApiModel>?, t: Throwable?) {
-                getEntries()
-            }
-        })
-    }
 
     fun setupListView(list: ArrayList<EntryApiModel>){
         val appRecyclerAdapter = AppRecyclerAdapter(context, list, object: OnViewHolderImageClick {
