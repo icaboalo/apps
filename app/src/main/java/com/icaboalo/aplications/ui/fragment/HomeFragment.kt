@@ -1,12 +1,14 @@
 package com.icaboalo.aplications.ui.fragment
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +20,7 @@ import com.icaboalo.aplications.io.model.ResponseApiModel
 import com.icaboalo.aplications.ui.activity.DetailActivity
 import com.icaboalo.aplications.ui.adapter.AppRecyclerAdapter
 import com.icaboalo.aplications.ui.adapter.OnViewHolderImageClick
+import com.icaboalo.aplications.util.VUtil
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -55,9 +58,7 @@ class HomeFragment: Fragment() {
 
                     setupListView(entryList)
                 }
-
             }
-
             override fun onFailure(call: Call<ResponseApiModel>?, t: Throwable?) {
                 getEntries()
             }
@@ -80,8 +81,14 @@ class HomeFragment: Fragment() {
             }
 
         })
-        val linearLayout = LinearLayoutManager(activity)
+
+        if (VUtil().getOrientation(activity)){
+            val linearLayout = LinearLayoutManager(activity)
+            appRecycler?.layoutManager = linearLayout
+        }else{
+            val staggeredGridLayout = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+            appRecycler?.layoutManager = staggeredGridLayout
+        }
         appRecycler?.adapter = appRecyclerAdapter
-        appRecycler?.layoutManager = linearLayout
     }
 }
