@@ -1,6 +1,7 @@
 package com.icaboalo.aplications.ui.activity
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -19,6 +20,13 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         setSupportActionBar(app_bar as Toolbar)
+
+        if(resources.getBoolean(R.bool.is_phone)){
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        }else{
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        }
+
         entry = intent.getSerializableExtra("ENTRY") as EntryApiModel
         supportActionBar!!.title = entry!!.name.label
         supportActionBar!!.subtitle = entry!!.category.attributes.label

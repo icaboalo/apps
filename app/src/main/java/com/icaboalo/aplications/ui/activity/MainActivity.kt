@@ -1,5 +1,6 @@
 package com.icaboalo.aplications.ui.activity
 
+import android.content.pm.ActivityInfo
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -15,6 +16,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(app_bar as Toolbar)
+
+        if(resources.getBoolean(R.bool.is_phone)){
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        }else{
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        }
 
         navigationViewOnClick()
         replaceFragment(HomeFragment())
