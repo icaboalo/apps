@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<ResponseApiModel>, response: Response<ResponseApiModel>) {
                 if (response.isSuccessful){
-                    Log.d("SUCCES", "succes")
                     val entryList: ArrayList<EntryApiModel> = response.body().feed.entry
                     this@MainActivity.entryList = entryList
                     replaceFragment(HomeFragment().newInstance(entryList))
@@ -66,7 +65,9 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 R.id.action_categories -> {
-                    fragment = CategoryFragment()
+                    if (entryList != null){
+                        fragment = CategoryFragment().newInstance(entryList!!)
+                    }
                 }
                 R.id.action_search -> {
 

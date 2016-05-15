@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.icaboalo.aplications.R
+import com.icaboalo.aplications.io.model.EntryApiModel
 import com.icaboalo.aplications.ui.adapter.MyViewPagerAdapter
 import java.util.*
 
@@ -18,6 +19,14 @@ class CategoryFragment: Fragment(){
 
     var tabLayout: TabLayout? = null
     var viewPager: ViewPager? = null
+
+    fun newInstance(entryList: ArrayList<EntryApiModel>): CategoryFragment{
+        val fragment = CategoryFragment()
+        val args = Bundle()
+        args.putSerializable("ENTRIES", entryList)
+        fragment.arguments = args
+        return fragment
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_category, container, false)
@@ -31,9 +40,26 @@ class CategoryFragment: Fragment(){
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val entryList = arguments.getSerializable("ENTRIES") as ArrayList<EntryApiModel>
+        getCategories(entryList)
     }
 
-    fun setupTabs(pagerList: ArrayList<MyViewPagerAdapter.ModelFragmentPager>){
+    fun getCategories(entryList: ArrayList<EntryApiModel>){
+        var categoryList = ArrayList<String>()
+        for (item in entryList){
+            val category_name = item.category.attributes.label
+            if (!categoryList.contains(category_name)){
+                categoryList.add(category_name)
+            }
+        }
+        setupTabs(categoryList)
+    }
+
+    fun setupTabs(titleList: ArrayList<String>){
+        val pagerList = ArrayList<MyViewPagerAdapter.ModelFragmentPager>()
+        for (title in titleList){
+            pagerList.add(MyViewPagerAdapter.ModelFragmentPager(Fragment(), title))
+        }
         viewPager?.adapter = MyViewPagerAdapter(childFragmentManager, pagerList)
         tabLayout?.setupWithViewPager(viewPager)
     }
