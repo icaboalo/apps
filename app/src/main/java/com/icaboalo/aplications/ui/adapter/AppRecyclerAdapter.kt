@@ -64,7 +64,7 @@ class AppRecyclerAdapter: RecyclerView.Adapter<AppRecyclerAdapter.AppViewHolder>
 
         constructor(itemView: View, appNameId: Int, appCategoryId: Int, appImageId: Int, appPositionId: Int, viewHolderClickListener: OnViewHolderImageClick) : super(itemView){
             this.viewHolderClick = viewHolderClickListener
-            this.appImage = itemView.findViewById(appImageId) as CircleImageView
+            this.appImage = itemView.findViewById(appImageId) as ImageView
             this.appName = itemView.findViewById(appNameId) as TextView
             this.appCategory = itemView.findViewById(appCategoryId) as TextView
             this.appPosition = itemView.findViewById(appPositionId) as TextView

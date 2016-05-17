@@ -3,9 +3,11 @@ package com.icaboalo.aplications.ui.activity
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.util.Log
+import android.view.MenuItem
 import com.icaboalo.aplications.R
 import com.icaboalo.aplications.io.ApiClient
 import com.icaboalo.aplications.io.model.EntryApiModel
@@ -28,6 +30,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(app_bar as Toolbar)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
         if (VUtil().getOrientation(this@MainActivity)){
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
@@ -36,6 +40,15 @@ class MainActivity : AppCompatActivity() {
         }
         navigationViewOnClick()
         getEntries()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId){
+            android.R.id.home -> {
+                drawer_layout.openDrawer(GravityCompat.START)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     fun getEntries(){
