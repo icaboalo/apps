@@ -32,8 +32,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         entry = intent.getSerializableExtra("ENTRY") as EntryApiModel
         supportActionBar!!.title = entry!!.name.label
         supportActionBar!!.subtitle = entry!!.category.attributes.label
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
         Picasso.with(this).load(entry!!.images[2].label).into(app_image)
         package_text.text = entry!!.id.attributes.bundleId
         release_date.text = entry!!.releaseDate.attributes.label
@@ -44,7 +44,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         val entry = intent.getSerializableExtra("ENTRY") as EntryApiModel
-        val goToDownload = Intent(Intent.ACTION_VIEW, Uri.parse(entry.link.attributes.refUrl))
+        val goToDownload = Intent(Intent.ACTION_VIEW, Uri.parse(entry.id.label))
         startActivity(goToDownload)
     }
 

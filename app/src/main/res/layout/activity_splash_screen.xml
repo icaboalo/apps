@@ -5,10 +5,10 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <ImageView
-        android:src="@drawable/apple_store_log"
-        android:padding="48dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <!--<ImageView-->
+        <!--android:src="@drawable/apple_store_log"-->
+        <!--android:padding="48dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"/>-->
 
 </LinearLayout>

@@ -9,15 +9,12 @@ import java.util.*
  */
 class EntryApiModel: Serializable {
 
-    constructor(name: Label, images: ArrayList<Label>, summary: Label, price: Label, contentType: Label, rights: Label, title: Label, link: Label, id: Label, artist: Label, category: Label, releaseDate: Label) {
+    constructor(name: LabelApiModel, images: ArrayList<LabelApiModel>, summary: LabelApiModel, price: LabelApiModel, rights: LabelApiModel, id: LabelApiModel, artist: LabelApiModel, category: LabelApiModel, releaseDate: LabelApiModel) {
         this.name = name
         this.images = images
         this.summary = summary
         this.price = price
-        this.contentType = contentType
         this.rights = rights
-        this.title = title
-        this.link = link
         this.id = id
         this.artist = artist
         this.category = category
@@ -25,105 +22,31 @@ class EntryApiModel: Serializable {
     }
 
     @SerializedName("im:name")
-    var name: Label
+    var name: LabelApiModel
 
     @SerializedName("im:image")
-    var images: ArrayList<Label>
+    var images: ArrayList<LabelApiModel>
 
     @SerializedName("summary")
-    var summary: Label
+    var summary: LabelApiModel
 
     @SerializedName("im:price")
-    var price: Label
-
-    @SerializedName("im:contentType")
-    var contentType: Label
+    var price: LabelApiModel
 
     @SerializedName("rights")
-    var rights: Label
-
-    @SerializedName("title")
-    var title: Label
-
-    @SerializedName("link")
-    var link: Label
+    var rights: LabelApiModel
 
     @SerializedName("id")
-    var id: Label
+    var id: LabelApiModel
 
     @SerializedName("im:artist")
-    var artist: Label
+    var artist: LabelApiModel
 
     @SerializedName("category")
-    var category: Label
+    var category: LabelApiModel
 
     @SerializedName("im:releaseDate")
-    var releaseDate: Label
-
-    class Label: Serializable{
-
-        constructor(label: String, attributes: Attributes) {
-            this.label = label
-            this.attributes = attributes
-        }
-
-        @SerializedName("label")
-        var label: String
-
-        @SerializedName("attributes")
-        var attributes: Attributes
-
-        class Attributes: Serializable{
-
-            constructor(height: String, amount: String, currency: String, term: String, label: String, rel: String, type: String, refUrl: String, id: String, bundleId: String, scheme: String) {
-                this.height = height
-                this.amount = amount
-                this.currency = currency
-                this.term = term
-                this.label = label
-                this.rel = rel
-                this.type = type
-                this.refUrl = refUrl
-                this.id = id
-                this.bundleId = bundleId
-                this.scheme = scheme
-            }
-
-            @SerializedName("height")
-            var height: String
-
-            @SerializedName("amount")
-            var amount: String
-
-            @SerializedName("currency")
-            var currency: String
-
-            @SerializedName("term")
-            var term: String
-
-            @SerializedName("label")
-            var label: String
-
-            @SerializedName("rel")
-            var rel: String
-
-            @SerializedName("type")
-            var type: String
-
-            @SerializedName("href")
-            var refUrl: String
-
-            @SerializedName("im:id")
-            var id: String
-
-            @SerializedName("im:bundleId")
-            var bundleId: String
-
-            @SerializedName("scheme")
-            var scheme: String
-
-        }
-    }
+    var releaseDate: LabelApiModel
 
     override fun toString(): String {
         return name.label
