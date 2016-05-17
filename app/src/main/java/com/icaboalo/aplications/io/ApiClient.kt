@@ -13,7 +13,7 @@ class ApiClient {
     fun getApiService(): ApiService {
         if (mApiService == null) {
             val nRetrofit = Retrofit.Builder()
-                    .baseUrl("https://itunes.apple.com/us/rss/topfreeapplications/limit=100/")
+                    .baseUrl("https://itunes.apple.com/us/rss/topfreeapplications/limit=20/")
                     .addConverterFactory(GsonConverterFactory.create()).build()
             mApiService = nRetrofit.create(ApiService::class.java)
         }
