@@ -1,7 +1,6 @@
 package com.icaboalo.aplications.util
 
 import android.content.Context
-import android.content.pm.ActivityInfo
 import com.icaboalo.aplications.R
 
 /**

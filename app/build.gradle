@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 23
@@ -45,7 +46,20 @@ dependencies {
 //    Circle image
     compile 'de.hdodenhof:circleimageview:2.0.0'
 
+
+    // jCenter
+    compile 'jp.wasabeef:recyclerview-animators:2.2.3'
+
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "io.realm:realm-gradle-plugin:0.90.1"
+    }
 }
 buildscript {
     ext.kotlin_version = '1.0.1-2'

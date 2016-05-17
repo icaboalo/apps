@@ -21,6 +21,10 @@ import com.icaboalo.aplications.ui.activity.DetailActivity
 import com.icaboalo.aplications.ui.adapter.AppRecyclerAdapter
 import com.icaboalo.aplications.ui.adapter.OnViewHolderImageClick
 import com.icaboalo.aplications.util.VUtil
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.SlideInLeftAnimationAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,6 +38,14 @@ class HomeFragment: Fragment() {
 
     var appRecycler: RecyclerView? = null
 
+    fun newInstance(entries: ArrayList<EntryApiModel>): HomeFragment{
+        val fragment = HomeFragment()
+        val args = Bundle()
+        args.putSerializable("ENTRIES", entries)
+        fragment.arguments = args
+        return fragment
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -45,25 +57,10 @@ class HomeFragment: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        getEntries()
+        val entryList: ArrayList<EntryApiModel> = arguments.getSerializable("ENTRIES") as ArrayList<EntryApiModel>
+        setupListView(entryList)
     }
 
-    fun getEntries(){
-        val call: Call<ResponseApiModel> = ApiClient().getApiService().getResponse();
-        call.enqueue(object: Callback<ResponseApiModel>{
-
-            override fun onResponse(call: Call<ResponseApiModel>, response: Response<ResponseApiModel>) {
-                if (response.isSuccessful){
-                    val entryList: ArrayList<EntryApiModel> = response.body().feed.entry
-
-                    setupListView(entryList)
-                }
-            }
-            override fun onFailure(call: Call<ResponseApiModel>?, t: Throwable?) {
-                getEntries()
-            }
-        })
-    }
 
     fun setupListView(list: ArrayList<EntryApiModel>){
         val appRecyclerAdapter = AppRecyclerAdapter(context, list, object: OnViewHolderImageClick {
@@ -86,9 +83,10 @@ class HomeFragment: Fragment() {
             val linearLayout = LinearLayoutManager(activity)
             appRecycler?.layoutManager = linearLayout
         }else{
-            val staggeredGridLayout = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            val staggeredGridLayout = StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL)
             appRecycler?.layoutManager = staggeredGridLayout
         }
-        appRecycler?.adapter = appRecyclerAdapter
+        val scaleAnimator = ScaleInAnimationAdapter(appRecyclerAdapter)
+        appRecycler?.adapter = scaleAnimator
     }
 }

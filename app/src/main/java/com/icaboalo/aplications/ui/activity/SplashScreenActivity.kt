@@ -7,7 +7,14 @@ import android.os.Bundle
 import android.support.v7.app.ActionBarActivity
 import android.view.Window
 import com.icaboalo.aplications.R
+import com.icaboalo.aplications.io.ApiClient
+import com.icaboalo.aplications.io.model.EntryApiModel
+import com.icaboalo.aplications.io.model.ResponseApiModel
+import com.icaboalo.aplications.ui.fragment.HomeFragment
 import com.icaboalo.aplications.util.VUtil
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 
 
@@ -25,19 +32,26 @@ class SplashScreenActivity : ActionBarActivity() {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
 
-
-        val task = object : TimerTask() {
-            override fun run() {
-                val goHome = Intent(this@SplashScreenActivity, MainActivity::class.java)
-                startActivity(goHome)
-                finish()
-            }
-        }
-        val timer = Timer()
-        timer.schedule(task, SPLASH_SCREEN_DELAY)
+        getEntries()
     }
 
-    companion object {
-        private val SPLASH_SCREEN_DELAY: Long = 3000
+
+    fun getEntries(){
+        val call: Call<ResponseApiModel> = ApiClient().getApiService().getResponse();
+        call.enqueue(object: Callback<ResponseApiModel> {
+
+            override fun onResponse(call: Call<ResponseApiModel>, response: Response<ResponseApiModel>) {
+                if (response.isSuccessful){
+                    val entryList: ArrayList<EntryApiModel> = response.body().feed.entry
+                    val goHome = Intent(this@SplashScreenActivity, MainActivity::class.java)
+                    goHome.putExtra("ENTRIES", entryList)
+                    startActivity(goHome)
+                    finish()
+                }
+            }
+            override fun onFailure(call: Call<ResponseApiModel>?, t: Throwable?) {
+                getEntries()
+            }
+        })
     }
 }
