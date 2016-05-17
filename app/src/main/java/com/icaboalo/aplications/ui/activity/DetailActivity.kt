@@ -33,6 +33,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar!!.title = entry!!.name.label
         supportActionBar!!.subtitle = entry!!.category.attributes.label
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
         Picasso.with(this).load(entry!!.images[2].label).into(app_image)
         package_text.text = entry!!.id.attributes.bundleId
         release_date.text = entry!!.releaseDate.attributes.label
