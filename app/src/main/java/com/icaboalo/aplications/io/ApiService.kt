@@ -1,6 +1,7 @@
 package com.icaboalo.aplications.io
 
 import com.icaboalo.aplications.io.model.ResponseApiModel
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -10,5 +11,5 @@ import retrofit2.http.GET
 interface ApiService {
 
     @GET("json")
-    fun getResponse(): Call<ResponseApiModel>
+    fun getResponse(): Call<ResponseBody>
 }
