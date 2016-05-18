@@ -1,5 +1,6 @@
 package com.icaboalo.aplications.ui.activity
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -39,8 +40,7 @@ class MainActivity : AppCompatActivity() {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
         navigationViewOnClick()
-        entryList = intent.getSerializableExtra("ENTRIES") as ArrayList<EntryApiModel>
-        replaceFragment(HomeFragment().newInstance(entryList!!))
+        getEntries()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -52,6 +52,23 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+
+    fun getEntries(){
+        val call: Call<ResponseApiModel> = ApiClient().getApiService().getResponse();
+        call.enqueue(object: Callback<ResponseApiModel> {
+
+            override fun onResponse(call: Call<ResponseApiModel>, response: Response<ResponseApiModel>) {
+                if (response.isSuccessful){
+                    val entryList: ArrayList<EntryApiModel> = response.body().feed.entry
+                    this@MainActivity.entryList = entryList
+                    replaceFragment(HomeFragment().newInstance(entryList))
+                }
+            }
+            override fun onFailure(call: Call<ResponseApiModel>?, t: Throwable?) {
+                getEntries()
+            }
+        })
+    }
 
     fun navigationViewOnClick() {
         navigation_view.setNavigationItemSelectedListener { item ->
