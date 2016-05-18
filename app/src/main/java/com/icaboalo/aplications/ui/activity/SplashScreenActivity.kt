@@ -10,7 +10,6 @@ import com.icaboalo.aplications.R
 import com.icaboalo.aplications.io.ApiClient
 import com.icaboalo.aplications.io.model.EntryApiModel
 import com.icaboalo.aplications.io.model.ResponseApiModel
-import com.icaboalo.aplications.ui.fragment.HomeFragment
 import com.icaboalo.aplications.util.VUtil
 import retrofit2.Call
 import retrofit2.Callback
